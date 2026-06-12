@@ -1,0 +1,81 @@
+{
+  "name": "vscode-browser-bridge",
+  "displayName": "Browser Bridge (MCP)",
+  "description": "Expose VS Code's integrated browser tools to external agents (Claude Code, Codex, ...) via MCP.",
+  "version": "0.2.7",
+  "publisher": "TheoZhao",
+  "license": "MIT",
+  "icon": "resources/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhaozhaozz/vscode-browser-bridge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhaozhaozz/vscode-browser-bridge/issues"
+  },
+  "homepage": "https://github.com/zhaozhaozz/vscode-browser-bridge#readme",
+  "engines": {
+    "vscode": "^1.110.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "workspace",
+    "ui"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "browserBridge.start",
+        "title": "Browser Bridge: Start MCP Server"
+      },
+      {
+        "command": "browserBridge.stop",
+        "title": "Browser Bridge: Stop MCP Server"
+      },
+      {
+        "command": "browserBridge.showStatus",
+        "title": "Browser Bridge: Show Status"
+      }
+    ],
+    "configuration": {
+      "title": "Browser Bridge",
+      "properties": {
+        "browserBridge.autoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Start the MCP server automatically when VS Code starts."
+        },
+        "browserBridge.port": {
+          "type": "number",
+          "default": 7345,
+          "description": "Preferred port for the MCP server (binds to 127.0.0.1). Falls back to a free port if taken."
+        },
+        "browserBridge.requireAuth": {
+          "type": "boolean",
+          "default": true,
+          "description": "Require the bearer token from the discovery file on every request. Disable only on single-user machines."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "package": "vsce package --allow-missing-repository --skip-license"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.110.0",
+    "@vscode/vsce": "^3.3.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0"
+  }
+}
