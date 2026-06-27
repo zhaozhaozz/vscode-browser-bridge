@@ -179,7 +179,7 @@ function toMcpContent(result: vscode.LanguageModelToolResult): CallToolResult['c
 
 function buildMcpServer(): Server {
 	const server = new Server(
-		{ name: 'vscode-browser-bridge', version: '0.2.7' },
+		{ name: 'vscode-browser-bridge', version: '0.2.9' },
 		{ capabilities: { tools: {} }, instructions: SERVER_INSTRUCTIONS },
 	);
 

@@ -165,7 +165,7 @@ function handleIdle(message) {
 			reply({
 				protocolVersion: message.params?.protocolVersion ?? '2025-03-26',
 				capabilities: { tools: {} },
-				serverInfo: { name: 'vscode-browser-bridge', version: '0.2.7' },
+				serverInfo: { name: 'vscode-browser-bridge', version: '0.2.9' },
 				instructions: IDLE_INSTRUCTIONS,
 			});
 			break;

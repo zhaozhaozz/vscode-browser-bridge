@@ -2,7 +2,7 @@
   "name": "vscode-browser-bridge",
   "displayName": "Browser Bridge (MCP)",
   "description": "Expose VS Code's integrated browser tools to external agents (Claude Code, Codex, ...) via MCP.",
-  "version": "0.2.7",
+  "version": "0.2.9",
   "publisher": "TheoZhao",
   "license": "MIT",
   "icon": "resources/icon.png",
@@ -76,6 +76,7 @@
     "@types/vscode": "^1.110.0",
     "@vscode/vsce": "^3.3.0",
     "esbuild": "^0.25.0",
+    "jsonc-parser": "^3.3.1",
     "typescript": "^5.8.0"
   }
 }

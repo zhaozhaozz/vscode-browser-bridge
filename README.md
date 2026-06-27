@@ -29,20 +29,22 @@ appears in the status bar.
 
 - CLI: `code --install-extension theozhao.vscode-browser-bridge`
 - From a `.vsix` on the [Releases page](https://github.com/zhaozhaozz/vscode-browser-bridge/releases):
-  `code --install-extension vscode-browser-bridge-0.2.7.vsix` (for Remote-SSH, run this on
+  `code --install-extension vscode-browser-bridge-0.2.9.vsix` (for Remote-SSH, run this on
   the remote).
 
 </details>
 
 ### 2. Connect your agent
 
-Click the status-bar item and choose **Show Status** — it copies a ready-to-paste config
-with the file path already filled in for your machine. Or set it up by hand:
+Click the status-bar item, choose **Show Status**, and pick your agent. Then either
+**Auto-configure** — it runs the setup command in a terminal for you — or **Copy** the
+ready-to-paste config. Both have the bridge path filled in for your machine. To set it up
+by hand instead, the snippets are:
 
 **Claude Code**
 
 ```bash
-claude mcp add vscode-browser -- node <bridge>
+claude mcp add -s user vscode-browser -- node <bridge>
 ```
 
 **Codex CLI** (`~/.codex/config.toml`)
@@ -52,6 +54,21 @@ claude mcp add vscode-browser -- node <bridge>
 command = "node"
 args = ["<bridge>"]
 env_vars = ["VSCODE_BROWSER_BRIDGE_INSTANCE"]
+```
+
+**opencode** (`opencode.json` in the project root, or `~/.config/opencode/opencode.json`)
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "vscode-browser": {
+      "type": "local",
+      "command": ["node", "<bridge>"],
+      "enabled": true
+    }
+  }
+}
 ```
 
 **Any other MCP client** — the standard stdio `mcpServers` form (Claude Desktop, Cline,
@@ -265,7 +282,7 @@ dotfiles. The root depends on where the extension host runs:
 The extension refreshes the `stdio-bridge.mjs` copy in this folder on every activation, so
 agent configs that point at `<globalStorage>/stdio-bridge.mjs` keep working across
 upgrades — unlike the versioned extension install folder
-(`.../theozhao.vscode-browser-bridge-0.2.7/`), which disappears on upgrade.
+(`.../theozhao.vscode-browser-bridge-0.2.9/`), which disappears on upgrade.
 
 ## Troubleshooting
 

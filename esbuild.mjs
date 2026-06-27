@@ -9,6 +9,11 @@ const ctx = await esbuild.context({
   external: ['vscode'],
   format: 'cjs',
   platform: 'node',
+  // Prefer ESM entry points. jsonc-parser's "main" is a UMD build whose
+  // require("./impl/*") esbuild can't statically follow (it leaves a runtime
+  // __require that fails once installed); its "module" (ESM) build bundles
+  // cleanly. Node platform otherwise defaults to ['main', 'module'].
+  mainFields: ['module', 'main'],
   target: 'node20',
   sourcemap: true,
   logLevel: 'info',
